@@ -67,7 +67,6 @@ void update(String val) {
         for (int ii = 0; ii < logs.length; ii ++) if (pair[0].equals(logTags[ii])) logs[ii].add(new Float(pair[1]));
         for (int ii = 0; ii < pwm.length; ii++) if (pair[0].equals("mtr" + (1 + ii))) pwm[ii] =  int(pair[1]);
         for (int ii = 0; ii < servo.length; ii++) if (pair[0].equals("servo" + (1 + ii))) servo[ii] =  int(pair[1]);
-        for (int ii = 0; ii < actuator.length; ii++) if (pair[0].equals("actuator" + (1 + ii))) actuator[ii] =  int(pair[1]);
 
         if (pair[0].equals("connected")) connected = (int(pair[1]) != 0);
         if (pair[0].equals("ps4")) controller = (int(pair[1]) != 0);
