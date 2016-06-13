@@ -45,17 +45,14 @@ class OverviewPlot {
       textAlign(CENTER);
       textSize(16);
       stroke(220);
-      if(actuator[0] == 1) fill(#3ADF00);
-      else noFill();
+   
       ellipse(width/2 +130 + dataShift, height/2-210, 50, 50);
       fill(0);
-      text("claw", width/2 +130 + dataShift, height/2-205);
-      
-      if(actuator[1] == 1) fill(#3ADF00);
-      else noFill();
+      text("arm", width/2 +130 + dataShift, height/2-205);
+      fill (255);
       ellipse(width/2 -130 + dataShift, height/2-210, 50, 50);
       fill(0);
-      text("pivot", width/2 -130 + dataShift, height/2-205);
+      text("claw", width/2 -130 + dataShift, height/2-205);
     }
   }
 }
