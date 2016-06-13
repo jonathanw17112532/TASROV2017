@@ -9,12 +9,12 @@ class OverviewPlot {
 
   OverviewPlot() { 
     rov = loadImage("ROV-MTR.png");
-    left1 = new mtrDial(width/2 -230 + dataShift, height/2-100);
-    left2 = new mtrDial(width/2 -230 + dataShift, height/2+150);
-    right1 = new mtrDial(width/2 +230 + dataShift, height/2-100);
-    right2 = new mtrDial(width/2 +230 + dataShift, height/2+150);
-    vert1 = new mtrDial(width/2 + dataShift, height/2 - 100, 60, 26);
-    vert2 = new mtrDial(width/2 + dataShift, height/2 + 133, 60, 26);
+    left1 = new mtrDial(width/2 -250 + dataShift, height/2-100);
+    left2 = new mtrDial(width/2 -250 + dataShift, height/2+150);
+    right1 = new mtrDial(width/2 +250 + dataShift, height/2-100);
+    right2 = new mtrDial(width/2 +250 + dataShift, height/2+150);
+    vert1 = new mtrDial(width/2 + dataShift, height/2 - 70, 60, 26);
+    vert2 = new mtrDial(width/2 + dataShift, height/2 + 170, 60, 26);
   }
 
   void display() {
@@ -46,13 +46,13 @@ class OverviewPlot {
       textSize(16);
       stroke(220);
    
-      ellipse(width/2 +130 + dataShift, height/2-210, 50, 50);
+      ellipse(width/2 +130 + dataShift, height/2-155, 50, 50);
       fill(0);
-      text("arm", width/2 +130 + dataShift, height/2-205);
+      text("arm", width/2 +130 + dataShift, height/2-150);
       fill (255);
-      ellipse(width/2 -130 + dataShift, height/2-210, 50, 50);
+      ellipse(width/2 -130 + dataShift, height/2-155, 50, 50);
       fill(0);
-      text("claw", width/2 -130 + dataShift, height/2-205);
+      text("claw", width/2 -130 + dataShift, height/2-150);
     }
   }
 }
