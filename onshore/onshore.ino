@@ -9,11 +9,12 @@
 
 #include "definitions.h"
 #include "Gamepad.h"
+#include "SimpleTimer.h"
 
 USB Usb;
 USBHub Hub(&Usb);
 HIDUniversal Hid(&Usb);
-IntervalTimer pcTimer, botTimer;
+SimpleTimer pcTimer, botTimer;
 
 Gamepad Joy;
 
@@ -36,7 +37,7 @@ void setup() {
     ErrorMessage<uint8_t > (PSTR("SetReportParser"), 1);
 
   delay(1000);
-  pcTimer.begin(telemetry, 200000);
+  pcTimer.setInterval(200, telemetry);
 }
 
 void controlOutput() {
@@ -45,6 +46,7 @@ void controlOutput() {
   updateServos();
   transmit();
   receiveData();
+  pcTimer.run();
 }
 
 void loop() {
