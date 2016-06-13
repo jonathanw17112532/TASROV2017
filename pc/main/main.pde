@@ -6,8 +6,6 @@
  ////////////////////////////////////////////////
  */
 
-import net.java.games.input.*;
-
 import controlP5.*;
 import processing.serial.*;
 
@@ -30,7 +28,7 @@ Button[] buttons;
 String[] comList;
 boolean serialSet, Comselected;
 //logs for graphs - see update() in calculationFunctions
-String[] logTags = new String[]{"voltage", "current", "conductivity", "motor1", "motor2", "motor3", "motor4"};
+String[] logTags = new String[]{"voltage", "current", "temperature", "motor1", "motor2", "motor3", "motor4"};
 int logs_length = logTags.length;
 ArrayList[] logs = new ArrayList[logs_length];
 
@@ -38,8 +36,7 @@ ArrayList[] logs = new ArrayList[logs_length];
 int pwm[] = new int[]{
   0, 256, 128, 128, 128, 128
 };
-int servo[] = new int[3];
-int actuator[] = new int[2];
+int servo[] = new int[7];
 long upTime = 0;
 int plotMode = 0; //0 volt, 1 motors, 2 weather, 3 serial
 int lastPulseTime = 0;
@@ -174,7 +171,7 @@ void drawBorderPieces() {
   // DISPLAY DEPTH
   textSize(16);
   fill(#89BFDB, 200);
-  text("Conductivity", width-25, height-65);
+  text("Temperature", width-25, height-65);
   textSize(32); 
   fill(0);
   text("sensor: "+nf(latestCond(), 4, 0), width-25, height-30);
@@ -226,11 +223,6 @@ void serialDisplay() {
   text("Servos:", 240, 125);
   fill(#39B4E3);
   for (int i = 0; i < servo.length; i++) text("servo" + i + ": "+servo[i], 240, 200 + 50*i);
-
-  fill(0);  
-  text("Actuators:", 440, 125); 
-  fill(#39B4E3);
-  for (int i = 0; i < actuator.length; i++) text("actuator" + i + ": "+actuator[i], 440, 200 + 50*i);
 }
 
 void textCol(String string, int x, int y, color col) {
