@@ -1,0 +1,17 @@
+ROV
+leftY	left stick, y	3	SLIDER	Y Axis	0	1.0	0.0
+leftX	left stick, x	3	SLIDER	X Axis	0	1.0	0.0
+rightY	right stick, y	3	SLIDER	Y Rotation	0	1.0	0.0
+rightX	right stick, x	3	SLIDER	X Rotation	0	1.0	0.0
+triggers	triggers -  left + right -	3	SLIDER	Z Axis	0	1.0	0.0
+but_d	button at bottom	1	BUTTON	Button 0	0	0.0	0.0
+but_r	button at right	1	BUTTON	Button 1	0	0.0	0.0
+but_l	button at left	1	BUTTON	Button 2	0	0.0	0.0
+but_u	button at up	1	BUTTON	Button 3	0	0.0	0.0
+bump_l	left bumper	1	BUTTON	Button 4	0	0.0	0.0
+bump_r	right bumper	1	BUTTON	Button 5	0	0.0	0.0
+back	back button	1	BUTTON	Button 6	0	0.0	0.0
+start	start button	1	BUTTON	Button 7	0	0.0	0.0
+click_l	left stick click	1	BUTTON	Button 8	0	0.0	0.0
+click_r	right stick click	1	BUTTON	Button 9	0	0.0	0.0
+hat	hat	2	HAT	cooliehat: Hat Switch	0	1.0	0.0
