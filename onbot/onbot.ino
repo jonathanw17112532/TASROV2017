@@ -12,6 +12,7 @@ const static uint8_t i2c_bus_addresses[9] = {0,    0x64, 0x65, 0x66, 0x67,
 static uint8_t i2c_motor_fault[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 const static uint8_t i2c_register_address = 0x00;
 
+const static uint8_t slave_address = 11;
 volatile static uint8_t servo_angles[6];
 
 volatile static uint8_t motor_direction[6] = {1, 1, 1, 1, 1, 1};
@@ -38,19 +39,14 @@ void loop() {
       // servo1_angle = controlCOM.read();
       // servo2_angle = controlCOM.read();
     }
-    /*else {
-      digitalWrite(13, LOW);
-      for (uint8_t x = 0; x < 6; x++) {
-        motor_speed[x] = 100;
-      };
-    }*/
 
-    // updates motors
+    // updates all i2c
     // digitalWrite(STATUS_LED_2, HIGH);
     for (int x = 0; x < 6; x++) {
       motorWrite(x + 1, motor_direction[x], motor_speed[x]);
       i2c_motor_fault[x] = motorReadStatus(x + 1);
     }
+    servoPush();
     // SERVO1.write(servo1_angle);
     // SERVO2.write(servo2_angle);
 
@@ -102,5 +98,14 @@ void motorWrite(uint8_t channel, uint8_t direction, uint8_t power) {
   Wire.beginTransmission(i2c_bus_addresses[channel]);
   Wire.write(i2c_register_address);
   Wire.write(power);
+  Wire.endTransmission();
+}
+
+void servoPush() {
+  Wire.beginTransmission(slave_address);
+  // Wire.write(i2c_register_address);
+  for (int i = 0; i < sizeof(servo_angles); i++) {
+    Wire.write(servo_angles[i]);
+  }
   Wire.endTransmission();
 }
