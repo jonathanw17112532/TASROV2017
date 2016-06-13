@@ -20,10 +20,7 @@
 
 #define FORWARD 1
 #define REVERSE 0
-
-#define SRV1 22 //9
-#define SRV2 33 //8
-
+ 
 #define _100HZ 10000
 #define _60HZ 16666
 #define _50HZ 20000

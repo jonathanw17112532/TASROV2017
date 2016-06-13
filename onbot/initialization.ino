@@ -9,7 +9,9 @@ inline void initPins(void) {
   pinMode(A11, INPUT);
   pinMode(A10, INPUT);
 
-  SERVO1.attach(SRV1);
-  SERVO2.attach(SRV2);
+  for (int i = 0; i < sizeof(SERVOS); i ++){
+    SERVOS[i].attach(SRV[i]);
+  }
+
   pinMode((int)13, OUTPUT);
 }
