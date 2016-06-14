@@ -14,6 +14,7 @@
 #include "SimpleTimer.h"
 
 Servo SERVOS[7];
+int servovalues[7];
 
 USB Usb;
 USBHub Hub(&Usb);
@@ -48,7 +49,7 @@ void controlOutput() {
   updateJoystick();
   updateMotors();
   updateServos();
-  transmit();
+  transmit(servovalues);
   receiveData();
   pcTimer.run();
 }
@@ -56,14 +57,11 @@ void controlOutput() {
 void loop() {
   while (true) {
     Usb.Task();
-    controlOutput();
 
-    int servovalues[7];
     for(int i=0; i<7; i++){
         servovalues[i]=SERVOS[i].read();    
     }
-    transmitServos(servovalues);
-    
+    controlOutput();
     delay(20);
   }
 }

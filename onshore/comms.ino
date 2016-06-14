@@ -1,14 +1,9 @@
-void transmit() {
+void transmit(int servoval[]) {
   BOTSIDE.write((byte)sync);
   for (int x = 0; x < 6; x++) {
     BOTSIDE.write(motorPWM[x]);
     BOTSIDE.write(motorDIR[x]);
   }
-  BOTSIDE.write(servo1);
-  BOTSIDE.write(servo2);
-}
-
-void transmitServos(int servoval[]){
   for (int i=0; i<7; i++){
     BOTSIDE.write(servoval[i]);
   }
