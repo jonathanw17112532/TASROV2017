@@ -2,8 +2,8 @@
 #include <Wire.h>
 #include "definitions.h"
 
-Servo SERVOS[6];
-int SRV[] = {22, 33, 34, 35, 36, 37};
+Servo SERVOS[2];
+int SRV[] = {22, 33};
 
 // const static uint8_t i2c_bus_addresses[9] = {0, 0x64, 0x65, 0x66, 0x67, 0x68,
 // 0x69, 0x6A, 0x6B};

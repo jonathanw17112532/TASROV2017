@@ -1,3 +1,5 @@
+#include <Servo.h>
+
 #include <hid.h>
 #include <hiduniversal.h>
 #include <usbhub.h>
@@ -10,6 +12,8 @@
 #include "definitions.h"
 #include "Gamepad.h"
 #include "SimpleTimer.h"
+
+Servo SERVOS[7];
 
 USB Usb;
 USBHub Hub(&Usb);
@@ -54,6 +58,12 @@ void loop() {
     Usb.Task();
     controlOutput();
 
+    int servovalues[7];
+    for(int i=0; i<7; i++){
+        servovalues[i]=SERVOS[i].read();    
+    }
+    transmit();
+    
     delay(20);
   }
 }
