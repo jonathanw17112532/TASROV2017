@@ -36,8 +36,9 @@ void loop() {
         motor_speed[x] = controlCOM.read();
         motor_direction[x] = controlCOM.read();
       };
-      // servo1_angle = controlCOM.read();
-      // servo2_angle = controlCOM.read();
+      for (uint8_t x=0; x<7; x++){
+        servo_angles[x] = controlCOM.read();
+      }
     }
 
     // updates all i2c
@@ -47,8 +48,9 @@ void loop() {
       i2c_motor_fault[x] = motorReadStatus(x + 1);
     }
     servoPush();
-    // SERVO1.write(servo1_angle);
-    // SERVO2.write(servo2_angle);
+    for (int x=0; x<6; x++){
+      SERVOS[1].write(servo_angles[x]);
+    }
 
     // calculates and returns a fault byte
     uint8_t motor_fault_byte;

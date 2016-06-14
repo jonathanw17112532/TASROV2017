@@ -82,6 +82,9 @@ void telemetry() {
 
   PCSIDE.print("&servo6=");
   PCSIDE.print(servo6);
+  
+  PCSIDE.print("&servo7=");
+  PCSIDE.print(servo7);
 
   PCSIDE.print("&connected=");
   PCSIDE.print(pulse);
