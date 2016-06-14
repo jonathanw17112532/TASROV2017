@@ -62,7 +62,7 @@ void loop() {
     for(int i=0; i<7; i++){
         servovalues[i]=SERVOS[i].read();    
     }
-    transmit();
+    transmitServos(servovalues);
     
     delay(20);
   }

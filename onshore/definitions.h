@@ -32,6 +32,12 @@ volatile uint16_t pneumaticUpdate = 0;
 
 volatile uint8_t servo1 = 90;
 volatile uint8_t servo2 = 90;
+volatile uint8_t servo3 = 90;
+volatile uint8_t servo4 = 90;
+volatile uint8_t servo5 = 90;
+volatile uint8_t servo6 = 90;
+volatile uint8_t servo7 = 90;
+
 
 volatile uint8_t pneumatics = 0;
 volatile uint8_t yawLock = 0;

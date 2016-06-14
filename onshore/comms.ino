@@ -8,6 +8,12 @@ void transmit() {
   BOTSIDE.write(servo2);
 }
 
+void transmitServos(int servoval[]){
+  for (int i=0; i<7; i++){
+    BOTSIDE.write(servoval[i]);
+  }
+}
+
 void receiveData() {
 
   if (BOTSIDE.available() && BOTSIDE.read() == 0xAA) {
@@ -69,6 +75,18 @@ void telemetry() {
 
   PCSIDE.print("&servo2=");
   PCSIDE.print(servo2);
+
+  PCSIDE.print("&servo3=");
+  PCSIDE.print(servo3);
+
+  PCSIDE.print("&servo4=");
+  PCSIDE.print(servo4);
+
+  PCSIDE.print("&servo5=");
+  PCSIDE.print(servo5);
+
+  PCSIDE.print("&servo6=");
+  PCSIDE.print(servo6);
 
   PCSIDE.print("&connected=");
   PCSIDE.print(pulse);
