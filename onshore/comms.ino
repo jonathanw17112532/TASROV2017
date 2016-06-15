@@ -4,7 +4,7 @@ void transmit(int servoval[]) {
     BOTSIDE.write(motorPWM[x]);
     BOTSIDE.write(motorDIR[x]);
   }
-  for (int i=0; i<7; i++){
+  for (int i=0; i<6; i++){
     BOTSIDE.write(servoval[i]);
   }
 }

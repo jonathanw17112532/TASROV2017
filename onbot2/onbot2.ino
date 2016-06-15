@@ -13,7 +13,7 @@ static uint8_t i2c_motor_fault[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 const static uint8_t i2c_register_address = 0x00;
 
 const static uint8_t servo_addresses[6] = {11, 12, 13, 14, 15, 16};
-volatile static uint8_t servo_angles[6];
+volatile static uint8_t servo_angles[2];
 
 volatile static uint8_t motor_direction[6] = {1, 1, 1, 1, 1, 1};
 volatile static uint8_t motor_speed[6] = {0, 0, 0, 0, 0, 0};

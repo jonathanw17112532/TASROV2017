@@ -171,7 +171,25 @@ void drawBorderPieces() {
   // DISPLAY DEPTH
   textSize(16);
   fill(#89BFDB, 200);
-  text("Temperature", width-25, height-65);
+  text("Temperature", width/3, height-65);
+  textSize(32); 
+  fill(0);
+  text("sensor: "+nf(latestCond(), 4, 0), width/3, height-30);
+
+textAlign(RIGHT); 
+  // DISPLAY DEPTH
+  textSize(16);
+  fill(#89BFDB, 200);
+  text("Pressure", width*3/4, height-65);
+  textSize(32); 
+  fill(0);
+  text("sensor: "+nf(latestCond(), 4, 0), width*3/4, height-30);
+  
+  textAlign(RIGHT); 
+  // DISPLAY DEPTH
+  textSize(16);
+  fill(#89BFDB, 200);
+  text("Depth", width-25, height-65);
   textSize(32); 
   fill(0);
   text("sensor: "+nf(latestCond(), 4, 0), width-25, height-30);
@@ -180,7 +198,7 @@ void drawBorderPieces() {
   // TIMER
   textSize(16); 
   fill(#89BFDB, 200);
-  if (!fullscreen) text("Mission Time", width/2, height-65);
+  if (!fullscreen) text("Mission Time", width/2, height-80);
   textSize(32);
   fill(0); 
   String dispStr = nf((int) ((upTime / (1000*60)) % 60), 2)+":"+nf((int) (upTime / 1000) % 60, 2)+":"+nf((int) ((upTime) % 1000)/10, 2);

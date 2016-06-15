@@ -13,8 +13,8 @@
 #include "Gamepad.h"
 #include "SimpleTimer.h"
 
-Servo SERVOS[7];
-int servovalues[7];
+Servo SERVOS[8];
+int servovalues[6];
 
 USB Usb;
 USBHub Hub(&Usb);
@@ -58,7 +58,7 @@ void loop() {
   while (true) {
     Usb.Task();
 
-    for(int i=0; i<7; i++){
+    for(int i=0; i<6; i++){
         servovalues[i]=SERVOS[i].read();    
     }
     controlOutput();
