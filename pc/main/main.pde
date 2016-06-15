@@ -2,7 +2,7 @@
 ////////////////////////////////////////////////
  [ ROV Debug Monitor ] Version 2.0 based on [ Arduino Cycle Computer ]        
  >> Original written by Adam O'Hern
- >> Modified by Anthony Lin and Joseph Chuang for ROV Debug Monitor
+ >> Modified by Anthony Lin, Joseph Chuang and Jonathan Wu for ROV Debug Monitor
  ////////////////////////////////////////////////
  */
 
@@ -142,7 +142,7 @@ void drawBorderPieces() {
   textAlign(LEFT);
   // DISPLAY TITLE
   textColSize("/// ROV monitor", 25, 50, DARKBLUE, 32);
-  textColSize("written by Anthony Lin, modified by Joseph Chuang, 2/3/2016", 25, 74, LIGHTGREY, 12);
+  textColSize("written by Anthony Lin, modified by Joseph Chuang and Jonathan Wu, 6/15/2016", 25, 74, LIGHTGREY, 12);
   //DISPLAY VOLTAGE
   textSize(16); 
   fill(#89BFDB, 200);
@@ -180,11 +180,14 @@ textAlign(RIGHT);
   // DISPLAY DEPTH
   textSize(16);
   fill(#89BFDB, 200);
-  text("Pressure", width*3/4, height-65);
+  text("Water Pressure", width*3/4, height-65);
   textSize(32); 
   fill(0);
   text("sensor: "+nf(latestCond(), 4, 0), width*3/4, height-30);
-  
+ 
+  float floatpressure=float(nf(latestCond(), 4, 0));
+  float floatdepth=(floatpressure-101.325)/10.052;
+   
   textAlign(RIGHT); 
   // DISPLAY DEPTH
   textSize(16);
@@ -192,7 +195,7 @@ textAlign(RIGHT);
   text("Depth", width-25, height-65);
   textSize(32); 
   fill(0);
-  text("sensor: "+nf(latestCond(), 4, 0), width-25, height-30);
+  text(nf(floatdepth, 2,0)+"m", width-25, height-30);
 
   textAlign(CENTER); 
   // TIMER
