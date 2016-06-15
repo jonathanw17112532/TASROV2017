@@ -1,11 +1,12 @@
-void transmit() {
+void transmit(int servoval[]) {
   BOTSIDE.write((byte)sync);
   for (int x = 0; x < 6; x++) {
     BOTSIDE.write(motorPWM[x]);
     BOTSIDE.write(motorDIR[x]);
   }
-  BOTSIDE.write(servo1);
-  BOTSIDE.write(servo2);
+  for (int i=0; i<6; i++){
+    BOTSIDE.write(servoval[i]);
+  }
 }
 
 void receiveData() {
@@ -69,6 +70,21 @@ void telemetry() {
 
   PCSIDE.print("&servo2=");
   PCSIDE.print(servo2);
+
+  PCSIDE.print("&servo3=");
+  PCSIDE.print(servo3);
+
+  PCSIDE.print("&servo4=");
+  PCSIDE.print(servo4);
+
+  PCSIDE.print("&servo5=");
+  PCSIDE.print(servo5);
+
+  PCSIDE.print("&servo6=");
+  PCSIDE.print(servo6);
+  
+  PCSIDE.print("&servo7=");
+  PCSIDE.print(servo7);
 
   PCSIDE.print("&connected=");
   PCSIDE.print(pulse);
