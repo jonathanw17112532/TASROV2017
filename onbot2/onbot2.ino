@@ -7,16 +7,10 @@ int SRV[] = {22, 33};
 
 // const static uint8_t i2c_bus_addresses[9] = {0, 0x64, 0x65, 0x66, 0x67, 0x68,
 // 0x69, 0x6A, 0x6B};
-const static uint8_t i2c_bus_addresses[9] = {0,    0x64, 0x65, 0x66, 0x67,
-                                             0x68, 0x69, 0x6A, 0x6B};
-static uint8_t i2c_motor_fault[8] = {0, 0, 0, 0, 0, 0, 0, 0};
-const static uint8_t i2c_register_address = 0x00;
 
-const static uint8_t servo_addresses[6] = {11, 12, 13, 14, 15, 16};
+const static uint8_t servo_addresses[2] = {11,12};
 volatile static uint8_t servo_angles[2];
 
-volatile static uint8_t motor_direction[6] = {1, 1, 1, 1, 1, 1};
-volatile static uint8_t motor_speed[6] = {0, 0, 0, 0, 0, 0};
 
 void setup() {
   delay(1000);     // Allow Attiny85s to initialize
