@@ -1,8 +1,21 @@
-void zeroMotors() {
-  for (int x = 0; x < 6; x++) {
-    motorPWM[x] = 0;
-    motorDIR[x] = 0;
-  }
+void updateJoystick() {
+  
+    int leftX, leftY, rightX, rightY;
+    leftY = map(Joy.getStk(1), 0, 255, -128, 128);
+    leftX = map(Joy.getStk(2), 0, 255, -128, 128);
+    rightY = map(Joy.getStk(3), 0, 255, -128, 128);
+    rightX = map(Joy.getStk(4), 0, 255, -128, 128);
+
+    motorCalc[0] = leftY;//constrain(-1*(leftY + leftX), -128, 128);
+    motorCalc[1] = leftX;//constrain(leftY - leftX, -128, 128);
+    motorCalc[2] = rightY;//constrain((rightY - rightX), -128, 128);
+    motorCalc[3] = rightX;//constrain((rightY + rightX), -128, 128);
+    motorCalc[4] = Joy.getBtn(7);
+    motorCalc[5] = Joy.getBtn(8);
+
+    //PCSIDE.println(Joy.getBtn(7));
+
+    //if(PS4.getButtonClick(OPTIONS)) PCSIDEMode = !PCSIDEMode;
 }
 
 void updateMotors() {
@@ -23,77 +36,13 @@ void updateMotors() {
 
   motorPWM[4] = motorCalc[4]*100;
   motorPWM[5] = motorCalc[5]*100;
-
-  
-  /*
-    if (PS4.getButtonPress(UP) || PS4.getButtonPress(DOWN)) {
-      if (PS4.getButtonPress(UP)) {
-        motorPWM[4] = 255;
-        motorDIR[4] = 0;
-        motorPWM[5] = 255;
-        motorDIR[5] = 0;
-      }
-      else if (PS4.getButtonPress(DOWN)) {
-        motorPWM[4] = 255;
-        motorDIR[4] = 1;
-        motorPWM[5] = 255;
-        motorDIR[5] = 1;
-      }
-
-    }
-    else {
-
-      if (motorCalc[4] > 10) {
-        motorPWM[4] = motorCalc[4];
-        motorPWM[5] = motorCalc[4];
-        motorDIR[4] = 0;
-        motorDIR[5] = 1;
-      }
-      else if (motorCalc[5] > 10) {
-        motorPWM[4] = motorCalc[5];
-        motorPWM[5] = motorCalc[5];
-        motorDIR[4] = 1;
-        motorDIR[5] = 0;
-      }
-      else {
-        motorPWM[4] = 0;
-        motorPWM[5] = 0;
-        motorDIR[4] = 0;
-        motorDIR[5] = 0;
-      }
-    }
-  */
-
-  //char buff[100];
-  //sprintf(buff, "Motor: %d %d %d %d  %d  %d  %d", motorPWM[0], motorPWM[1], motorPWM[2], motorPWM[3], motorPWM[4], motorPWM[5], servo1);
-  //PCSIDE.println(buff);
-
 }
 
 void updateServos() {
-  if (millis() - servoUpdate > delayThreshold + 10) {
-    /*if (PS4.getButtonPress(TRIANGLE)) servo1 -= SERVORATE;
-      if (PS4.getButtonPress(CROSS)) servo1 += SERVORATE;
-    */
-    if (servo1 > 180) servo1 = 180;
-    if (servo1 < 3) servo1 = 2;
+  for (int i = 0; i < 6; i++) {
+      servoValues[i] = analogRead(i + 1);
+  };
 
-    servoUpdate = millis();
-  }
-}
-
-void updatePeripherals() {
-  /*if(PS4.getButtonClick(R1)) armGrab = !armGrab;
-    if(PS4.getButtonClick(L1)) armSwivel = !armSwivel;
-
-    if(PS4.getButtonClick(TOUCHPAD)) timer = millis();
-    //if(PS4.getButtonClick(SHARE))
-    //servo1 = 90;
-
-    if(armGrab) bitWrite(pneumatics, 1, 1);
-    else bitWrite(pneumatics, 1, 0);
-    if(armSwivel) bitWrite(pneumatics, 0, 1);
-    else bitWrite(pneumatics, 0, 0);*/
 }
 
 int convert(int pwm, int dir){
@@ -104,5 +53,9 @@ int convert(int pwm, int dir){
   return out;
 }
 
-
-
+void zeroMotors() {
+  for (int x = 0; x < 6; x++) {
+    motorPWM[x] = 0;
+    motorDIR[x] = 0;
+  }
+}
