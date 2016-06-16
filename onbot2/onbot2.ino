@@ -1,6 +1,18 @@
 #include <Servo.h>
 #include <Wire.h>
 #include "definitions.h"
+#include "OneWire.h"
+#include "DallasTemperature.h"
+ 
+// Data wire is plugged into pin 2 on the Arduino
+#define ONE_WIRE_BUS 2
+ 
+// Setup a oneWire instance to communicate with any OneWire devices 
+// (not just Maxim/Dallas temperature ICs)
+OneWire oneWire(ONE_WIRE_BUS);
+ 
+// Pass our oneWire reference to Dallas Temperature.
+DallasTemperature sensors(&oneWire);
 
 Servo SERVOS[2];
 int SRV[] = {22, 33};
@@ -19,48 +31,20 @@ void setup() {
   controlCOM.begin(38400);
   initPins();
   digitalWrite(13, HIGH);  // Signal initialization complete
-}
-
-void loop() {
-  delay(100);
-  for (int i = 0; i < sizeof(SERVOS); i++) {
-    SERVOS[i].write(servo_angles[i]);
-  }
-}
-
-void receiveEvent(int howMany) {
-  for (int i = 0; i < sizeof(SERVOS); i++) {
-    int x = Wire.read();
-    servo_angles[i] = x;
-  }
-}
-
-/*#include "OneWire.h"
-#include "DallasTemperature.h"
- 
-// Data wire is plugged into pin 2 on the Arduino
-#define ONE_WIRE_BUS 2
- 
-// Setup a oneWire instance to communicate with any OneWire devices 
-// (not just Maxim/Dallas temperature ICs)
-OneWire oneWire(ONE_WIRE_BUS);
- 
-// Pass our oneWire reference to Dallas Temperature.
-DallasTemperature sensors(&oneWire);
- 
-void setup(void)
-{
-  // start serial port
+  
+   // start serial port
   Serial.begin(9600);
   Serial.println("Dallas Temperature IC Control Library Demo");
 
   // Start up the library
   sensors.begin();
 }
- 
- 
-void loop(void)
-{
+
+void loop() {
+  for (int i = 0; i < sizeof(SERVOS); i++) {
+    SERVOS[i].write(servo_angles[i]);
+  }
+  
   // call sensors.requestTemperatures() to issue a global temperature
   // request to all devices on the bus
   Serial.print(" Requesting temperatures...");
@@ -74,4 +58,12 @@ void loop(void)
     delay(100);
  
 }
-*/
+
+void receiveEvent(int howMany) {
+  for (int i = 0; i < sizeof(SERVOS); i++) {
+    int x = Wire.read();
+    servo_angles[i] = x;
+  }
+}
+
+
