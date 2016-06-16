@@ -1,11 +1,11 @@
-void transmit(int servoval[]) {
+void transmit() {
   BOTSIDE.write((byte)sync);
   for (int x = 0; x < 6; x++) {
     BOTSIDE.write(motorPWM[x]);
     BOTSIDE.write(motorDIR[x]);
   }
-  for (int i=0; i<6; i++){
-    BOTSIDE.write(servoval[i]);
+  for (int i=0; i<7; i++){
+    BOTSIDE.write(servoValues[i]);
   }
 }
 
@@ -29,18 +29,10 @@ void receiveData() {
 }
 
 void telemetry() {
-  PCSIDE.print("voltage=");
-  PCSIDE.print(voltage);
-
-  PCSIDE.print("&current=");
-  PCSIDE.print(amps);
-
-  PCSIDE.print("&pressure=");
-  PCSIDE.print(pressure);
-
-  PCSIDE.print("&conductivity=");
-  PCSIDE.print(analogRead(condSensor));
-
+  PCSIDE.print("voltage=" + String(voltage));
+  PCSIDE.print("&current=" + String(amps));
+  PCSIDE.print("&pressure=" + String(pressure));
+  PCSIDE.print("&conductivity=" + String(analogRead(condSensor)));
   PCSIDE.print("&mtr1=");
   if (!bitRead(motorFault, 0)) PCSIDE.print(motorCalc[0]);
   else PCSIDE.print(-1);
@@ -65,26 +57,9 @@ void telemetry() {
   if (!bitRead(motorFault, 5)) PCSIDE.print(motorCalc[5]);
   else PCSIDE.print(-1);
 
-  PCSIDE.print("&servo1=");
-  PCSIDE.print(servo1);
-
-  PCSIDE.print("&servo2=");
-  PCSIDE.print(servo2);
-
-  PCSIDE.print("&servo3=");
-  PCSIDE.print(servo3);
-
-  PCSIDE.print("&servo4=");
-  PCSIDE.print(servo4);
-
-  PCSIDE.print("&servo5=");
-  PCSIDE.print(servo5);
-
-  PCSIDE.print("&servo6=");
-  PCSIDE.print(servo6);
-  
-  PCSIDE.print("&servo7=");
-  PCSIDE.print(servo7);
+  for (int i = 0; i < 7; i ++){
+    PCSIDE.print("&servo" + (i + 1) + String(servoValues[i]));
+  };
 
   PCSIDE.print("&connected=");
   PCSIDE.print(pulse);
