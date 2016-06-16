@@ -10,7 +10,6 @@ void transmit() {
 }
 
 void receiveData() {
-
   if (BOTSIDE.available() && BOTSIDE.read() == 0xAA) {
     motorFault = BOTSIDE.read();
     for (int x = 0; x < 6; x++) conv.bytes[x] = BOTSIDE.read();

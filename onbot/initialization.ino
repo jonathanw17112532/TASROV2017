@@ -12,5 +12,5 @@ inline void initPins(void) {
     SERVOS[i].attach(SRV[i]);
   }
 
-  pinMode((int)13, OUTPUT);
+  pinMode(13, OUTPUT);
 }

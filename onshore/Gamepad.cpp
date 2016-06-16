@@ -1,18 +1,23 @@
 /*
-  stick: id 1-4 mapped to 0-3 in array
+  getStk(id): 
+  id:
   1: left x
   2: left y
   3: right x
   4: right y
+  RETURNS int 0-255
 
-  hat:
+  getHat(): 
+  RETURNS int 0-8
   0: not pressed
   1-8: top, top right, (clockwise etc)
 
-  buttons: id 1-12 mapped to 0-11 in array
+  getBtn(id): 
+  id:
   1-10: buttons as labeled
   11: left stick click
   12: right stick click
+  RETURNS: boolean
 */
 
 #include "Gamepad.h"
