@@ -70,6 +70,8 @@ void loop() {
     // digitalWrite(STATUS_LED_2, LOW);
 
     // controlCOM.println(motor_speed[0]);
+    
+    Wire.requestFrom(11,4);
   }
 }
 
