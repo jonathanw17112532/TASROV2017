@@ -31,14 +31,15 @@ volatile uint16_t servoUpdate = 0;
 volatile uint16_t pneumaticUpdate = 0;
 
 volatile int servoValues[] = {
-  0, 0, 0, 0, 0, 0, 0
+  90, 90, 90, 90, 90, 90, 90
 };
 
-int servoPorts[] = {
+uint8_t servoPorts[] = {
 	1, 2, 3, 4, 5, 6
 };
 
-volatile float pressure = 0.00;
+volatile uint8_t pressure = 0;
+volatile uint8_t temperature = 0;
 
 volatile float voltage = 0.00;
 volatile float amps = 0.00;

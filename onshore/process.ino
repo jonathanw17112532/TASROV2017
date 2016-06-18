@@ -40,9 +40,8 @@ void updateMotors() {
 
 void updateServos() {
   for (int i = 0; i < 6; i++) {
-      servoValues[i] = analogRead(i + 1);
+      servoValues[i] = analogRead(servoPorts[i]);
   };
-
 }
 
 int convert(int pwm, int dir){
