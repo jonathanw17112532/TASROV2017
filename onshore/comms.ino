@@ -4,7 +4,7 @@ void transmit() {
     BOTSIDE.write(motorPWM[x]);
     BOTSIDE.write(motorDIR[x]);
   }
-  for (int i=0; i<7; i++){
+  for (int i = 0; i < 7; i++) {
     BOTSIDE.write(servoValues[i]);
   }
 }
@@ -13,9 +13,12 @@ void receiveData() {
   if (BOTSIDE.available() && BOTSIDE.read() == 0xAA) {
     temperature = BOTSIDE.read();
     pressure = BOTSIDE.read();
+    while (BOTSIDE.available()) {
+      BOTSIDE.read();
+    }
     lastReceive = millis();
   }
-  
+
   if (millis() - lastReceive > 10) {
     digitalWrite(outputPins[1], LOW);
     pulse = 0;
@@ -55,7 +58,7 @@ void telemetry() {
   if (!bitRead(motorFault, 5)) PCSIDE.print(motorCalc[5]);
   else PCSIDE.print(-1);
 
-  for (int i = 0; i < 7; i ++){
+  for (int i = 0; i < 7; i ++) {
     PCSIDE.print("&servo");
     PCSIDE.print(i + 1);
     PCSIDE.print("=");

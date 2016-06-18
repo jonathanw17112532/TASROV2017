@@ -55,10 +55,8 @@ void controlOutput() {
 }
 
 void loop() {
-  while (true) {
-    //runs the controller libraries
-    Usb.Task();
-    controlOutput();
-    delay(20);
-  }
+  //runs the controller libraries
+  Usb.Task();
+  controlOutput();
+  delay(50);
 }
