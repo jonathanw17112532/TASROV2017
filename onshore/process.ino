@@ -39,9 +39,12 @@ void updateMotors() {
 }
 
 void updateServos() {
-  for (int i = 0; i < 6; i++) {
-      servoValues[i] = analogRead(servoPorts[i]);
-  };
+      servoValues[0] = analogRead(map(servoPorts[0],260,390,45,95));
+      servoValues[1] = analogRead(map(servoPorts[1],130,770,20,160));
+      servoValues[2] = analogRead(map(servoPorts[2],230,1030,20,160));
+      servoValues[3] = analogRead(map(servoPorts[3],60,500,20,140));
+      servoValues[4] = analogRead(map(servoPorts[4],200,770,20,150));
+      servoValues[5] = analogRead(map(servoPorts[5],150,770,20,160));
 }
 
 int convert(int pwm, int dir){

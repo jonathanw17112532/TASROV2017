@@ -5,7 +5,7 @@
 #include <usbhub.h>
 
 #ifdef dobogusinclude
-#include <spi4teensy3.h>
+#include "spi4teensy3.h"
 #include <SPI.h>
 #endif
 
@@ -59,6 +59,5 @@ void loop() {
     //runs the controller libraries
     Usb.Task();
     controlOutput();
-    delay(20);
   }
 }
