@@ -11,9 +11,8 @@ void transmit() {
 
 void receiveData() {
   if (BOTSIDE.available() && BOTSIDE.read() == 0xAA) {
-    motorFault = BOTSIDE.read();
-    for (int x = 0; x < 6; x++) conv.bytes[x] = BOTSIDE.read();
-    voltage = conv.val;
+    temperature = BOTSIDE.read();
+    pressure = BOTSIDE.read();
     lastReceive = millis();
   }
   
@@ -57,7 +56,10 @@ void telemetry() {
   else PCSIDE.print(-1);
 
   for (int i = 0; i < 7; i ++){
-    PCSIDE.print("&servo" + (i + 1) + String(servoValues[i]));
+    PCSIDE.print("&servo");
+    PCSIDE.print(i + 1);
+    PCSIDE.print("=");
+    PCSIDE.print(servoValues[i]);
   };
 
   PCSIDE.print("&connected=");

@@ -8,11 +8,11 @@
 #define STATUS_LED_1 5
 #define STATUS_LED_2 6
 
+#define sync 0xAA
+
 #define COMMS_RX 9
 #define COMMS_TX 10
 
-#define POWER_SENSE A2
- 
 // General
 #define controlCOM Serial1
 //#define razorCOM Serial3
