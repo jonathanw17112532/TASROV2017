@@ -17,7 +17,7 @@ volatile static uint8_t servo_angles[8] = {45, 90, 90, 90, 90, 90, 90, 90};
 
 SimpleTimer bot2Timer;
 
-volatile static uint8_t motor_direction[6] = {1, 1, 1, 1, 1, 1};
+volatile static uint8_t motor_direction[6] = {0, 0, 0, 0, 0, 0};
 volatile static uint8_t motor_speed[6] = {0, 0, 0, 0, 0, 0};
 
 void setup() {
@@ -54,27 +54,17 @@ void loop() {
   }
 
   bot2Timer.run();
-
+  Serial.println(motor_speed[0]);
+  Serial.println(motor_speed[1]);
+  Serial.println(motor_speed[2]);
+  Serial.println(motor_speed[3]);
 
   controlCOM.write((byte)sync);
   controlCOM.write(temperature);
-  Serial.println(temperature);
   controlCOM.write(pressure);
 
   digitalWrite(13, LOW);
 }
-
-/**
-   [motorReadStatus]
-   @param  channel Channel #, 1-8
-   @return         True/False; True for FAULT
-*/
-uint8_t readSensors() {
-  Wire.requestFrom(slave_address, 2);
-  temperature = Wire.read();
-  pressure = Wire.read();
-}
-
 /**
    [motorWrite]
    @param  channel   Channel #, 1-8
@@ -95,24 +85,28 @@ void motorWrite(uint8_t channel, uint8_t direction, uint8_t power) {
 
 void bot2Process() {
   servoPush();
-  readSensors();
+  delay(50);
+  char c[] = {0, 0, 0, 0};
+  Wire.requestFrom(slave_address, 4);
+  for (int i = 0; i < 4; i ++) {
+    c[i] = Wire.read();
+  }
+  temperature = (c[0] - '0') * 10 + (c[1] - '0');
+  pressure = (c[2] - '0') * 10 + (c[3] - '0');
 }
 
 void servoPush() {
   Wire.beginTransmission(slave_address);
-  // Wire.write(i2c_register_address);
-  //
   for (int i = 4; i < 6; i++) {
-    uint8_t power = 15;
+    uint8_t power = motor_speed[i];
     if (motor_direction[i])
       bitSet(power, 0);
     else
       bitClear(power, 0);
-
     Wire.write(90 + power);
   }
   for (int i = 6; i < sizeof(servo_angles); i++) {
-    Wire.write(servo_angles[i]);
+    Wire.write( (char) servo_angles[i]);
   }
   Wire.endTransmission();
 }

@@ -14,9 +14,9 @@ DallasTemperature sensors(&oneWire);
 
 Servo SERVOS[4];
 
-uint8_t temperature, pressure;
+uint8_t temperature = 0, pressure = 0;
 
-volatile static uint8_t servo_angles[4];
+volatile static uint8_t servo_angles[] = {89, 89, 89, 89};
 
 void setup() {
   Serial.begin(9600);
@@ -33,23 +33,18 @@ void loop() {
   sensors.requestTemperatures();
   temperature = (sensors.getTempCByIndex(0));
   pressure = analogRead(A5) / 10;
-  Serial.println(temperature);
-  Serial.println(pressure);
-  Serial.println();
 }
 
 void receiveEvent(int howMany) {
-  for (int i = 0; i < sizeof(SERVOS); i++) {
+  for (int i = 0; i < 4; i++) {
     uint8_t x = Wire.read();
     servo_angles[i] = x;
     SERVOS[i].write(servo_angles[i]);
+    Serial.println(servo_angles[i]);
   }
 }
 
 void requestEvent() {
-  digitalWrite(13, HIGH);
-  delay(50);
-  Wire.write(temperature);
-  Wire.write(pressure);
-  digitalWrite(13, LOW);
+  String sendThis = (String)(temperature * 100 + pressure);
+  Wire.write(sendThis.c_str());
 }
