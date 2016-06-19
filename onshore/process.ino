@@ -34,17 +34,14 @@ void updateMotors() {
     }
   }
 
-  motorPWM[4] = motorCalc[4]*100;
-  motorPWM[5] = motorCalc[5]*100;
+  motorPWM[4] = motorCalc[4]*15;
+  motorPWM[5] = motorCalc[5]*15;
 }
 
 void updateServos() {
-      servoValues[0] = analogRead(map(servoPorts[0],260,390,45,95));
-      servoValues[1] = analogRead(map(servoPorts[1],130,770,20,160));
-      servoValues[2] = analogRead(map(servoPorts[2],230,1030,20,160));
-      servoValues[3] = analogRead(map(servoPorts[3],60,500,20,140));
-      servoValues[4] = analogRead(map(servoPorts[4],200,770,20,150));
-      servoValues[5] = analogRead(map(servoPorts[5],150,770,20,160));
+  for (int i = 0; i < 6; i++) {
+      servoValues[i] = map(analogRead(servoPorts[i]), servoRanges[i][0],servoRanges[i][1],servoRanges[i][2],servoRanges[i][3]);
+  };
 }
 
 int convert(int pwm, int dir){

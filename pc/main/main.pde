@@ -28,7 +28,7 @@ Button[] buttons;
 String[] comList;
 boolean serialSet, Comselected;
 //logs for graphs - see update() in calculationFunctions
-String[] logTags = new String[]{"voltage", "current", "temperature", "motor1", "motor2", "motor3", "motor4"};
+String[] logTags = new String[]{"voltage", "current", "pressure","temperature", "motor1", "motor2", "motor3", "motor4"};
 int logs_length = logTags.length;
 ArrayList[] logs = new ArrayList[logs_length];
 
@@ -99,7 +99,7 @@ void draw()
   stroke(0);
   fill(0);
   textSize(10);
-  text(DEBUGMESSAGE, 500, 500);
+  text(DEBUGMESSAGE, 800, 500);
 }
 
 /*void serialEvent(Serial evt) {

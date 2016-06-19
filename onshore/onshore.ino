@@ -5,7 +5,7 @@
 #include <usbhub.h>
 
 #ifdef dobogusinclude
-#include "spi4teensy3.h"
+#include <spi4teensy3.h>
 #include <SPI.h>
 #endif
 
@@ -34,13 +34,10 @@ void setup() {
 
   if (Usb.Init() == -1) Serial.println("OSC did not start.");
 
-  delay(200);
 
   if (!Hid.SetReportParser(0, &Joy))
     ErrorMessage<uint8_t>(PSTR("SetReportParser"), 1);
-
-  delay(1000);
-
+    
   //transmits to PC every 200ms
   pcTimer.setInterval(200, telemetry);
 }
@@ -55,9 +52,8 @@ void controlOutput() {
 }
 
 void loop() {
-  while (true) {
-    //runs the controller libraries
-    Usb.Task();
-    controlOutput();
-  }
+  //runs the controller libraries
+  Usb.Task();
+  controlOutput();
+  delay(100);
 }

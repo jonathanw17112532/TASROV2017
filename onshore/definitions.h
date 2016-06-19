@@ -35,7 +35,7 @@ volatile int servoValues[] = {
 };
 
 uint8_t servoPorts[] = {
-	1, 2, 3, 4, 5, 6
+  1, 2, 3, 4, 5, 6
 };
 
 volatile uint8_t pressure = 0;
@@ -56,4 +56,19 @@ union conv_tag {
   float val;
 }
 conv;
+
+uint8_t servoRanges[6][4] = {{
+    260, 390, 45, 95
+  }, {
+    130, 770, 20, 160
+  }, {
+    230, 1030, 20, 160
+  }, {
+    60, 500, 20, 140
+  }, {
+    200, 770, 20, 150
+  }, {
+    140, 780, 20, 160
+  }
+};
 
