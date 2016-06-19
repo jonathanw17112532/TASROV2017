@@ -50,7 +50,7 @@ class VoltsPlot {
       }
     }
     popMatrix();
-    displayHUD(latestCond());
+    displayHUD(latestVolt());
   }
 
   void displayHUD(float value) {

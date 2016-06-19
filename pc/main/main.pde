@@ -1,9 +1,9 @@
 /*
-////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
  [ ROV Debug Monitor ] Version 2.0 based on [ Arduino Cycle Computer ]        
  >> Original written by Adam O'Hern
  >> Modified by Anthony Lin, Joseph Chuang and Jonathan Wu for ROV Debug Monitor
- ////////////////////////////////////////////////
+ ////////////////////////////////////////////////////////////////////////////////
  */
 
 import controlP5.*;
@@ -84,8 +84,8 @@ void setup()
 
   overviewButton = new Button("overview", width - 460, 70, 100, 30, BUTTONCOL);
   powerButton = new Button("power", width - 360, 70, 100, 30, BUTTONCOL);
-  voltButton = new Button("sensor", width - 260, 70, 100, 30, BUTTONCOL);
-  serialButton = new Button("serial", width - 160, 70, 100, 30, BUTTONCOL);
+  voltButton = new Button("voltage sensor", width - 260, 70, 140, 30, BUTTONCOL);
+  serialButton = new Button("serial", width - 120, 70, 100, 30, BUTTONCOL);
   buttons = new Button[]{overviewButton, powerButton, voltButton, serialButton};
 }
 
@@ -112,7 +112,7 @@ void serialIO() {
     readSerial(); 
   }
 
-  voltPlot.update(latestCond()); 
+  voltPlot.update(latestTemp()); 
   powerPlot.update(latestVolt(), latestCurrent());
 }
 
@@ -174,7 +174,7 @@ void drawBorderPieces() {
   text("Temperature", width/3, height-65);
   textSize(32); 
   fill(0);
-  text("sensor: "+nf(latestCond(), 4, 0), width/3, height-30);
+  text("sensor: "+nf(latestTemp(), 4, 0), width/3, height-30);
 
 textAlign(RIGHT); 
   // DISPLAY DEPTH
@@ -183,9 +183,9 @@ textAlign(RIGHT);
   text("Water Pressure", width*3/4, height-65);
   textSize(32); 
   fill(0);
-  text("sensor: "+nf(latestCond(), 4, 0), width*3/4, height-30);
+  text("sensor: "+nf(latestPressure(), 4, 0), width*3/4, height-30);
  
-  float floatpressure=float(nf(latestCond(), 4, 0));
+  float floatpressure=float(nf(latestPressure(), 4, 0));
   float floatdepth=(floatpressure-101.325)/10.052;
    
   textAlign(RIGHT); 

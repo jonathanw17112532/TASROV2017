@@ -95,9 +95,15 @@ float latestCurrent() {
   } else return 0.00;
 }
 
-float latestCond() {
+float latestPressure() {
   if (logs[2].size() > 0) {
     return (Float)logs[2].get(logs[0].size()-1);
+  } else return 0.00;
+}
+
+float latestTemp() {
+  if (logs[3].size() > 0) {
+    return (Float)logs[3].get(logs[0].size()-1);
   } else return 0.00;
 }
 
