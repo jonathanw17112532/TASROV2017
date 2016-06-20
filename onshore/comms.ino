@@ -4,8 +4,8 @@ void transmit() {
     BOTSIDE.write(motorPWM[x]);
     BOTSIDE.write(motorDIR[x]);
   }
-  for (int i = 0; i < 7; i++) {
-    BOTSIDE.write(servoValues[i]);
+  for (int i = 0; i < 8; i++) {
+    BOTSIDE.write((uint8_t)servoValues[i]);
   }
 }
 
@@ -37,7 +37,6 @@ void telemetry() {
   PCSIDE.print("&temperature=");
   PCSIDE.print(temperature);
   
-  PCSIDE.print("&conductivity=" + String(analogRead(condSensor)));
   PCSIDE.print("&mtr1=");
   if (!bitRead(motorFault, 0)) PCSIDE.print(motorCalc[0]);
   else PCSIDE.print(-1);
@@ -62,11 +61,11 @@ void telemetry() {
   if (!bitRead(motorFault, 5)) PCSIDE.print(motorCalc[5]);
   else PCSIDE.print(-1);
 
-  for (int i = 0; i < 7; i ++) {
+  for (int i = 0; i < 8; i ++) {
     PCSIDE.print("&servo");
     PCSIDE.print(i + 1);
     PCSIDE.print("=");
-    PCSIDE.print(servoValues[i]);
+    PCSIDE.print(servoRaws[i]);
   };
   
   PCSIDE.print("&connected=");

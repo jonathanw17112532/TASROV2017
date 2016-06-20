@@ -19,20 +19,20 @@ uint8_t temperature = 0, pressure = 0;
 volatile static uint8_t servo_angles[] = {90, 90, 90, 90};
 
 void setup() {
+  delay(4000);
   Serial.begin(9600);
   sensors.begin();
   Wire.begin(11);  // I2C
   Wire.onReceive(receiveEvent);
   Wire.onRequest(requestEvent);
   initPins();
-  delay(2000);
 }
 
 void loop() {
   sensors.requestTemperatures();
   temperature = (sensors.getTempCByIndex(0));
   pressure = analogRead(A5) / 10;
-  delay(50);
+  delay(200);
 }
 
 void receiveEvent(int howMany) {

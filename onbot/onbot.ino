@@ -18,7 +18,7 @@ const static uint8_t i2c_bus_addresses[9] = {0x66, 0x67, 0x69, 0x6A};
 const static uint8_t i2c_register_address = 0x00;
 
 const static uint8_t slave_address = 11;
-volatile static uint8_t servo_angles[8] = {45, 90, 90, 90, 90, 90, 90, 90};
+volatile static uint8_t servo_angles[8] = {90, 90, 90, 90, 90, 90, 90, 90};
 
 SimpleTimer bot2Timer, sensorTimer;
 
@@ -26,7 +26,7 @@ volatile static uint8_t motor_direction[6] = {0, 0, 0, 0, 0, 0};
 volatile static uint8_t motor_speed[6] = {0, 0, 0, 0, 0, 0};
 
 void setup() {
-     // Allow Attiny85s to initialize
+  // Allow Attiny85s to initialize
   Wire.begin();  // I2C
   controlCOM.begin(38400);
   Serial.begin(9600);
@@ -34,7 +34,7 @@ void setup() {
   temperature = 20;
   bot2Timer.setInterval(200, bot2Process);
   sensorTimer.setInterval(500, sensorProcess);
-  delay(2000);
+  delay(3000);
 }
 
 void loop() {
@@ -42,7 +42,7 @@ void loop() {
   //process complete signals received from onshore
 
   while (controlCOM.available()) {
-    if (controlCOM.available() > 13 && controlCOM.read() == 0xAA) {
+    if (controlCOM.available() > 20 && controlCOM.read() == 0xAA) {
       for (int i = 0; i < 6; i++) {
         motor_speed[i] = controlCOM.read();
         motor_direction[i] = controlCOM.read();
@@ -54,8 +54,6 @@ void loop() {
         controlCOM.read();
       }
     }
-    else
-      controlCOM.read();
   }
 
   // pushes values to motors via i2c
@@ -68,7 +66,11 @@ void loop() {
 
   for (int i = 0; i < 6; i++) {
     SERVOS[i].write(servo_angles[i]);
+    Serial.print(servo_angles[i]);
+    Serial.print("    ");
   }
+
+  Serial.println();
 
   bot2Timer.run();
   sensorTimer.run();
@@ -117,10 +119,9 @@ void servoPush() {
   for (int i = 4; i < 6; i++) {
     uint8_t power = motor_speed[i];
     if (motor_direction[i])
-      bitSet(power, 0);
+      Wire.write(90 - power);
     else
-      bitClear(power, 0);
-    Wire.write(90 + power);
+      Wire.write(90 + power);
   }
   for (int i = 6; i < sizeof(servo_angles); i++) {
     Wire.write( (char) servo_angles[i]);

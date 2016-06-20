@@ -4,9 +4,6 @@
  * 	Serial2 - Surface communications
  */
 
-// PIN DECLARATIONS
-#define STATUS_LED_1 5
-#define STATUS_LED_2 6
 
 #define sync 0xAA
 

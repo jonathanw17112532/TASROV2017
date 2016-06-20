@@ -18,20 +18,21 @@ volatile int motorCalc[] = {
 };
 
 uint8_t inputPins[] = {
-  A0, A3
 };
 
 uint8_t outputPins[] = {
-  13, A2
+  13
 };
-
-volatile uint8_t condSensor = A3;
 
 volatile uint16_t servoUpdate = 0;
 volatile uint16_t pneumaticUpdate = 0;
 
+volatile int servoRaws[] = {
+  90, 90, 90, 90, 90, 90, 130, 90
+};
+
 volatile int servoValues[] = {
-  90, 90, 90, 90, 90, 90, 90
+  90, 90, 90, 90, 90, 90, 130, 90
 };
 
 uint8_t servoPorts[] = {
@@ -57,18 +58,18 @@ union conv_tag {
 }
 conv;
 
-uint8_t servoRanges[6][4] = {{
-    260, 390, 45, 95
+int servoRanges[6][4] = {{
+    280, 460, 45, 95
   }, {
-    130, 770, 20, 160
+    90, 630, 160, 20
   }, {
-    230, 1030, 20, 160
+    430, 900, 10, 170
   }, {
-    60, 500, 20, 140
+    100, 500, 140, 20
   }, {
-    200, 770, 20, 150
+    300, 775, 20, 150
   }, {
-    140, 780, 20, 160
+    150, 800, 10, 170
   }
 };
 

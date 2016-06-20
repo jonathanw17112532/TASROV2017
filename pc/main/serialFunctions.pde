@@ -97,7 +97,7 @@ float latestCurrent() {
 
 float latestCond() {
   if (logs[2].size() > 0) {
-    return (Float)logs[2].get(logs[0].size()-1);
+    return (Float)logs[2].get(logs[2].size()-1);
   } else return 0.00;
 }
 
